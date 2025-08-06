@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PulseTradeX – Demo Stock Broker</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
   <style>
     :root {
       --primary: #22d3ee;
@@ -13,67 +14,72 @@
       --surface: #1f2937;
       --accent: #38bdf8;
       --white: #fff;
-      --shadow: 0 4px 24px 0 rgba(56,189,248,0.15);
+      --shadow: 0 4px 22px 0 rgba(56,189,248,0.12);
       --green: #10b981;
       --red: #ef4444;
       --yellow: #f59e42;
-      --blue: #38bdf8;
     }
+    html,body { scroll-behavior:smooth; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Montserrat', sans-serif;
       background: var(--bg);
       color: var(--white);
+      line-height: 1.64;
       overflow-x: hidden;
-      line-height: 1.6;
     }
     header {
       position: relative;
-      width: 100%;
-      height: 95vh;
-      min-height: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      width: 100vw;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
       background: var(--surface);
+      overflow: hidden;
+      padding-bottom: 60px;
     }
     #hero-video {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      position: absolute;
+      top: 0; left: 0; width: 100vw; height: 100vh;
       object-fit: cover;
       z-index: 0;
-      filter: brightness(0.2) blur(1.7px);
+      filter: brightness(0.20) blur(2px);
+      pointer-events: none;
+      min-height: 425px;
     }
     .header-content {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 650px;
+      max-width: 710px;
       margin: 0 auto;
       text-align: center;
+      padding: 80px 12vw 60px 12vw;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
     .logo {
-      font-size: 2.6rem;
+      font-size: 2.7rem;
       font-weight: 700;
       color: var(--primary);
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
       letter-spacing: 2px;
-      text-shadow: 0 4px 12px var(--surface);
+      text-shadow: 0 4px 18px var(--surface);
     }
     .hook {
-      font-size: 1.5rem;
+      font-size: 1.36rem;
       font-weight: 500;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.4rem;
       color: var(--accent);
-      text-shadow: 0 2px 16px #000;
+      text-shadow: 0 2px 12px #000;
     }
     h1 {
-      font-size: 2.7rem;
+      font-size: 2.5rem;
       margin-bottom: 0.7rem;
       letter-spacing: 1px;
+      font-weight: bold;
+      line-height: 1.14;
     }
     .cta-buttons {
-      margin-top: 1.5rem;
+      margin-top: 1.3rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -83,24 +89,23 @@
       background: linear-gradient(90deg, var(--primary), var(--secondary));
       color: var(--white);
       border: none;
-      padding: 1em 2.4em;
-      font-size: 1.08rem;
+      padding: 1em 2.2em;
+      font-size: 1.06rem;
       border-radius: 50px;
       font-weight: bold;
       box-shadow: var(--shadow);
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.18s, transform 0.18s;
+      transition: background 0.18s, transform 0.13s;
     }
     .cta:hover { background: var(--secondary); transform: translateY(-2px) scale(1.05);}
-    /* 3D/Animated Graph Placeholder */
     .hero-3d {
-      margin: 55px auto 0 auto;
-      width: 360px;
-      height: 190px;
+      margin: 60px auto 0 auto;
+      width: 340px;
+      height: 170px;
       background: linear-gradient(135deg, #1e293b, #4f46e5);
       border-radius: 16px;
-      box-shadow: 0 12px 60px #38bdf86f;
+      box-shadow: 0 12px 50px #38bdf87e;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -109,33 +114,38 @@
       position: relative;
       z-index: 5;
       overflow: hidden;
-    }
-    .hero-3d-canvas {
-      width: 320px; height: 140px; background: transparent;
-      display: flex; align-items: flex-end; justify-content: flex-start;
-    }
-    .hero-3d-title {
-      font-size: 1.1rem;
-      color: var(--accent);
-      text-shadow: 0 2px 18px #38bdf8, 0 1px 9px #000;
-      font-weight: 600;
-      margin-top: 3px;
+      margin-bottom: 30px;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-25px);}
+      50% { transform: translateY(-17px);}
     }
-    /* Section Styles */
+    .hero-3d-canvas {
+      width: 295px; height: 109px;
+      display: flex; align-items: flex-end; justify-content: flex-start;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+    .hero-3d-title {
+      font-size: 1.09rem;
+      color: var(--accent);
+      text-shadow: 0 2px 15px #38bdf8, 0 1px 9px #000;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    /* SECTION SPACING */
     section {
-      padding: 70px 18px;
-      max-width: 1100px;
+      padding: 82px 4vw 72px 4vw;
+      max-width: 1200px;
       margin: 0 auto;
       background: none;
     }
+    section:not(:first-child) {margin-top: 32px;}
     h2 {
       font-size: 2rem;
       color: var(--primary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.7rem;
       font-weight: 700;
       text-align: center;
       letter-spacing: 1px;
@@ -143,39 +153,39 @@
     .benefit-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
+      gap: 30px 35px;
       justify-content: center;
+      margin-bottom: 12px;
     }
     .benefit {
-      background: rgba(34,211,238,0.06);
+      background: rgba(34,211,238,0.08);
       border-left: 4px solid var(--primary);
-      padding: 1.6em 1.3em;
+      padding: 1.8em 1.2em 1.5em 1.7em;
       border-radius: 13px;
       min-width: 220px;
-      max-width: 315px;
-      margin: 10px 0;
+      max-width: 310px;
+      margin: 12px 0;
       position: relative;
-      font-size: 1.08rem;
-      flex: 1 0 240px;
+      font-size: 1.1rem;
+      flex: 1 0 220px;
       box-shadow: var(--shadow);
       transition: transform 0.15s;
     }
-    .benefit:hover { transform: translateY(-2px) scale(1.02); }
+    .benefit:hover { transform: translateY(-2px) scale(1.02);}
     .benefit-img {
       width: 40px; height: 40px;
       background: var(--primary);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      position: absolute; left: -21px; top: -21px;
+      position: absolute; left: -21px; top: -22px;
       box-shadow: 0 2px 12px #38bdf8b1;
     }
     .benefit-img img { width: 29px; }
 
-    /* Graph Section */
-    .charts-section {margin-top: 54px; padding: 60px 0;}
+    .charts-section { margin-top: 40px; padding: 60px 0 45px 0; }
     .charts-row {
       display: flex;
-      gap: 35px;
+      gap: 43px 37px;
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-start;
@@ -184,42 +194,38 @@
       background: var(--surface);
       border-radius: 18px;
       box-shadow: var(--shadow);
-      padding: 26px 23px 24px 23px;
-      min-width: 308px; max-width: 420px;
+      padding: 28px 24px 28px 21px;
+      min-width: 310px; max-width: 400px;
       flex: 1 0 330px;
       display: flex; flex-direction: column; align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 38px;
+      min-height: 210px;
     }
     .chart-title {
-      font-size: 1.2em;
+      font-size: 1.19em;
       font-weight: 600;
-      margin-bottom: 13px;
+      margin-bottom: 15px;
       color: var(--primary);
     }
-    .stock-fake-img {
-      width:100%; max-width:320px; border-radius:12px; background:rgba(255,255,255,0.02); box-shadow:0 6px 24px #38bdf844; margin:14px 0 4px 0;
-    }
-
-    /* Testimonials */
-    .testimonials {margin-top: 54px;}
     .testimonial-list {
       margin: 0 auto;
-      max-width: 900px;
+      max-width: 940px;
       display: flex;
-      gap: 38px;
+      gap: 34px 40px;
       flex-wrap: wrap;
       justify-content: center;
+      margin-bottom: 10px;
     }
     .testimonial {
       background: #121a2c;
-      border-radius: 11px;
-      padding: 29px 21px;
-      min-width: 235px; max-width: 340px;
+      border-radius: 14px;
+      padding: 29px 17px;
+      min-width: 238px; max-width: 340px;
       flex: 1 0 235px;
-      margin: 0 5px;
-      text-align: left;
-      box-shadow: 0 2px 17px #18181b77;
+      box-shadow: 0 2px 20px #18181b60;
       position: relative;
+      margin-bottom: 28px;
+      text-align: left;
     }
     .testimonial:before {
       content: '“';
@@ -239,28 +245,28 @@
     .testimonial-author { margin-top: 1em; font-weight: 700; color: var(--accent);}
     .testimonial-title { font-size: 1em; color: #b1fffb9a; font-style: italic; }
 
-    /* About & Contact */
+    /* ABOUT & CONTACT */
     .about-content, .contact-content {
-      max-width: 760px;
+      max-width: 750px;
       margin: 0 auto;
       text-align: center;
-      font-size: 1.17em;
+      font-size: 1.15em;
     }
     .about-content img {
-      width: 180px; border-radius: 90px; margin: 1.2em 0 1.1em 0; box-shadow: 0 1px 12px #22d3ee55;
+      width: 180px; border-radius: 90px; margin: 1.2em 0 1.09em 0; box-shadow: 0 1px 12px #22d3ee55;
     }
     .contact-details {
       margin: 38px auto 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 11px;
+      gap: 14px;
       font-size: 1.08em;
     }
     .cta-secondary {
       background: var(--accent);
       color: var(--surface);
-      margin-top: 18px;
+      margin-top: 22px;
       padding: 12px 30px;
       border-radius: 30px;
       border: none;
@@ -271,107 +277,118 @@
       transition: background 0.17s;
     }
     .cta-secondary:hover { background: var(--secondary); color: var(--white);}
-    /* Instagram-like Fake Recent Feed (long-scroll) */
-    .feed-section {padding:0 0 75px 0;}
+    /* Instagram-like Feed (for scroll) */
+    .feed-section {padding:0 0 80px 0;}
     .feed-title {
-      text-align:center;font-size:1.46rem;font-weight:600;color:var(--primary);margin-bottom:1.6em;margin-top:2em;
+      text-align:center;font-size:1.45rem;font-weight:600;color:var(--primary);margin-bottom:2.1em;margin-top:2em;
     }
     .feed-list {
-      display:flex;flex-wrap:wrap;justify-content:center;gap:39px;
-      max-width: 1200px;margin:0 auto;
+      display:flex;flex-wrap:wrap;justify-content:center;gap:36px 37px;
+      max-width: 1240px;margin:0 auto;
     }
     .feed-card {
       background:var(--surface);border-radius:20px;box-shadow:var(--shadow);
-      padding:18px 19px;min-width:255px;max-width:320px;flex:1 0 250px;
-      display:flex;flex-direction:column;align-items:center;margin-bottom:32px;
+      padding:17px 20px;min-width:255px;max-width:318px;flex:1 0 230px;
+      display:flex;flex-direction:column;align-items:center;margin-bottom:34px;
+      min-height: 282px;
     }
-    .feed-img{width:85%;border-radius:11px;margin-bottom:14px;box-shadow:0 5px 22px #22d3ee33;}
-    .feed-caption {font-size:1.05em;color:var(--white);margin-top:5px;text-align:center;}
-    /* Signup Section */
+    .feed-img{width:100%;border-radius:11px;margin-bottom:13px;box-shadow:0 5px 20px #22d3ee37;}
+    .feed-caption {font-size:1.04em;color:var(--white);margin-top:4px;text-align:center;}
+
     #signup input, #signup button {
-      width:100%;margin-bottom:14px;padding:14px;border-radius:7px;border:none;font-size:1em;
+      width:100%;margin-bottom:13px;padding:14px;border-radius:7px;border:none;font-size:1em;
     }
     #signup button {
       background:linear-gradient(90deg, var(--primary), var(--secondary));color:var(--white);
-      font-size:1.07em;font-weight:bold;border:none;cursor:pointer;margin-top:6px;box-shadow:var(--shadow);
-      transition:background 0.18s;
+      font-size:1.08em;font-weight:bold;border:none;cursor:pointer;margin-top:8px;box-shadow:var(--shadow);
+      transition:background 0.17s;
     }
     #signup button:hover {background:var(--secondary);}
-    /* Responsive */
-    @media (max-width: 950px) {
-      h1 { font-size:2rem;}
-      .benefit-list, .testimonial-list, .charts-row, .feed-list {flex-direction:column;align-items:center;}
+    @media (max-width:1000px) {
+      .charts-row, .testimonial-list, .feed-list, .benefit-list { flex-direction: column; align-items: center;}
+      .chart-card, .testimonial, .feed-card, .benefit { min-width: 220px; max-width: 96vw;}
+      .hero-3d,.hero-3d-canvas { width:98vw; max-width:340px; }
+      .header-content { padding:64px 5vw 45px 5vw;}
     }
-    @media (max-width: 600px) {
-      header { height:62vh;min-height:225px;}
-      .header-content { padding: 7vw 2vw;}
-      h1 { font-size:1.2rem;}
-      section { padding:35px 4vw;}
+    @media (max-width: 700px) {
+      header { min-height: 90vh;}
+      .header-content { padding: 43px 5vw 25px 5vw;}
+      h1 { font-size: 1.15rem;}
       .charts-row,.feed-list{gap:18px;}
+      .benefit-list{gap:18px;}
     }
-    html,body { scroll-behavior:smooth;}
+    @media (max-width:500px) {
+      .hero-3d {width:99vw;max-width:98vw;}
+      .chart-card, .testimonial, .feed-card, .benefit { max-width:99vw;}
+      .about-content img {width:130px;}
+      h2 { font-size: 1.19rem;}
+    }
+    footer {
+      padding:40px 0 22px 0;
+      text-align:center;
+      color:#6d28d9;
+      font-size:1.07em;
+      background:#0f172a;
+      margin-top:48px;
+    }
   </style>
 </head>
 <body>
   <!-- HERO HEADER -->
   <header>
-    <!-- Trading video loop as background -->
     <video id="hero-video" autoplay loop muted playsinline>
       <source src="https://assets.mixkit.co/videos/preview/mixkit-animated-stock-market-chart-1325-large.mp4" type="video/mp4">
-      <!-- fallback image can go here -->
     </video>
-    <div class="header-content">
+    <div class="header-content" data-aos="fade-down" data-aos-duration="1000">
       <div class="logo">PulseTradeX</div>
       <div class="hook">
         Are you missing out because of slow, clunky platforms?<br>
         <strong>Trade On the Pulse—Never Let Market Gains Slip Away!</strong>
       </div>
-      <h1>Frictionless, Fast, and Secure Stock Trading<br>for Modern Traders</h1>
-      <div class="cta-buttons">
+      <h1>Frictionless, Fast, and Secure Trading<br>for Smart Investors</h1>
+      <div class="cta-buttons" data-aos="fade-up" data-aos-delay="300">
         <a class="cta" href="#signup">Open Free Account</a>
         <a class="cta" href="#benefits">Why PulseTradeX?</a>
         <a class="cta" href="#about">Our Story</a>
         <a class="cta" href="#contact">Contact Us</a>
       </div>
-
-      <!-- Animated Stock Graph in 3D area -->
-      <div class="hero-3d">
-        <canvas class="hero-3d-canvas" id="heroChart" width="320" height="140"></canvas>
+      <div class="hero-3d" data-aos="zoom-in" data-aos-delay="500">
+        <canvas class="hero-3d-canvas" id="heroChart" width="295" height="109"></canvas>
         <div class="hero-3d-title">Live-Look Demo: Market Signals</div>
       </div>
     </div>
   </header>
 
   <!-- BROKER BENEFITS -->
-  <section id="benefits" class="benefits">
+  <section id="benefits" class="benefits" data-aos="fade-up">
     <h2>Broker Benefits</h2>
     <div class="benefit-list">
-      <div class="benefit">
+      <div class="benefit" data-aos="fade-right">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/money-bag.png" alt="Low Fees"></div>
         <b>Zero Commission</b><br>
         Trade stocks, ETFs, and options for $0 per order.
       </div>
-      <div class="benefit">
+      <div class="benefit" data-aos="fade-up">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/clock--v1.png" alt="24/7 Support"></div>
         <b>24/7 Expert Support</b><br>
         Get instant help day or night from trading specialists.
       </div>
-      <div class="benefit">
+      <div class="benefit" data-aos="fade-left">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/parallel-tasks.png" alt="Advanced Tools"></div>
         <b>Pro Charting Tools</b><br>
         Get market analytics & signals built for professionals.
       </div>
-      <div class="benefit">
+      <div class="benefit" data-aos="fade-right">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/lock-2.png" alt="Security"></div>
         <b>Bank-Grade Security</b><br>
         End-to-end encryption and insurance for your assets.
       </div>
-      <div class="benefit">
+      <div class="benefit" data-aos="fade-up">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/speed.png" alt="Fast Execution"></div>
         <b>Lightning Execution</b><br>
         Your trades execute instantly—no delays.
       </div>
-      <div class="benefit">
+      <div class="benefit" data-aos="fade-left">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/graduation-cap.png" alt="Education"></div>
         <b>Trader Academy</b><br>
         Free webinars and market education for all skill levels.
@@ -380,74 +397,96 @@
   </section>
 
   <!-- DYNAMIC CHARTS & GRAPHICS SECTION -->
-  <section class="charts-section">
+  <section class="charts-section" data-aos="fade-up">
     <h2>Market Insights & Visualizations</h2>
     <div class="charts-row">
-      <div class="chart-card">
+      <div class="chart-card" data-aos="flip-left">
         <div class="chart-title">Stock Price Over Time</div>
-        <canvas id="lineChart" width="300" height="130"></canvas>
+        <canvas id="lineChart" width="292" height="120"></canvas>
       </div>
-      <div class="chart-card">
+      <div class="chart-card" data-aos="flip-up">
         <div class="chart-title">Portfolio Allocation</div>
-        <canvas id="doughnutChart" width="270" height="130"></canvas>
+        <canvas id="doughnutChart" width="230" height="120"></canvas>
       </div>
-      <div class="chart-card">
+      <div class="chart-card" data-aos="flip-right">
         <div class="chart-title">Top Gainers & Losers</div>
-        <canvas id="barChart" width="290" height="130"></canvas>
+        <canvas id="barChart" width="268" height="120"></canvas>
       </div>
     </div>
   </section>
 
   <!-- DEMO FAKE TRADER FEED (social/market/news scroller) -->
-  <section class="feed-section">
+  <section class="feed-section" data-aos="fade-up">
     <div class="feed-title">PulseTradeX Market Moments</div>
     <div class="feed-list">
-      <div class="feed-card">
+      <div class="feed-card" data-aos="fade-right">
         <img class="feed-img" src="https://images.unsplash.com/photo-1517971071642-34a2d3ecc61c?auto=format&fit=crop&w=400&q=80" alt="Stock Desk"/>
         <div class="feed-caption">"Biggest rally of the year—S&P 500 surges past resistance"<br><small>2 mins ago</small></div>
       </div>
-      <div class="feed-card">
+      <div class="feed-card" data-aos="fade-up">
         <img class="feed-img" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Trader"/>
-        <div class="feed-caption">"AI-powered stock signals now triggering more trades than ever"<br><small>12 mins ago</small></div>
+        <div class="feed-caption">"AI-powered signals now triggering more trades than ever"<br><small>12 mins ago</small></div>
       </div>
-      <div class="feed-card">
+      <div class="feed-card" data-aos="fade-left">
         <img class="feed-img" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Charts"/>
         <div class="feed-caption">"Real-time analytics: Spotting the breakout before anyone else!"<br><small>22 mins ago</small></div>
       </div>
-      <div class="feed-card">
+      <div class="feed-card" data-aos="fade-right">
         <img class="feed-img" src="https://images.unsplash.com/photo-1508387023473-984a15e8dab2?auto=format&fit=crop&w=400&q=80" alt="Laptop Dashboard"/>
         <div class="feed-caption">"3D dashboards and animated ticker for immersive trading"<br><small>39 mins ago</small></div>
+      </div>
+      <div class="feed-card" data-aos="fade-up">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80" alt="Finance Meeting"/>
+        <div class="feed-caption">"Breaking: Microcaps spike on midday influx, brokers innovate on risk controls!"<br><small>54 mins ago</small></div>
+      </div>
+      <div class="feed-card" data-aos="fade-left">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?auto=format&fit=crop&w=400&q=80" alt="Investor Smile"/>
+        <div class="feed-caption">"Personalized AI news feed changing how I trade each morning."<br><small>1 hour ago</small></div>
+      </div>
+      <div class="feed-card" data-aos="fade-right">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Multiple Screens"/>
+        <div class="feed-caption">"PulseTradeX hit my profit alert to the second—loving the new push notifications!"<br><small>1.3 hours ago</small></div>
+      </div>
+      <div class="feed-card" data-aos="fade-up">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1515168833906-d2c5a12d07b9?auto=format&fit=crop&w=400&q=80" alt="Algorithm"/>
+        <div class="feed-caption">"Algorithm just called market bottom with 94% accuracy backtest results!"<br><small>2 hours ago</small></div>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
-  <section class="testimonials">
+  <section class="testimonials" data-aos="fade-up">
     <h2>What Our Traders Say</h2>
     <div class="testimonial-list">
-      <div class="testimonial">
+      <div class="testimonial" data-aos="fade-right">
         <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v3.png" alt="user1"/></div>
         "PulseTradeX is so fast, I never miss a market swing. The intuitive interface and stunning dashboards are a game changer!"
         <div class="testimonial-author">— Alex S.</div>
         <div class="testimonial-title">Day Trader, New York</div>
       </div>
-      <div class="testimonial">
+      <div class="testimonial" data-aos="fade-up">
         <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-female-circle--v3.png" alt="user2"/></div>
-        "Superb tutorials! From rookie to confident investor—all thanks to their trader academy and 24/7 support."
+        "Superb tutorials! From rookie to confident investor—all thanks to their academy and support team."
         <div class="testimonial-author">— Priya D.</div>
         <div class="testimonial-title">Swing Trader, Mumbai</div>
       </div>
-      <div class="testimonial">
+      <div class="testimonial" data-aos="fade-left">
         <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v2.png" alt="user3"/></div>
-        "Funds feel extremely safe with their security-first philosophy. 3D analytics make analysis fun and effective."
+        "Funds feel extremely safe. 3D analytics make analysis both fun and effective."
         <div class="testimonial-author">— Ben L.</div>
         <div class="testimonial-title">Growth Investor, London</div>
+      </div>
+      <div class="testimonial" data-aos="fade-up">
+        <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v1.png" alt="user4"/></div>
+        "Thanks to PulseTradeX education, I just smashed my yearly goals in 7 months!"
+        <div class="testimonial-author">— Samir Q.</div>
+        <div class="testimonial-title">Options Trader, Dubai</div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT US -->
-  <section class="about" id="about">
+  <section class="about" id="about" data-aos="fade-up">
     <h2>About PulseTradeX</h2>
     <div class="about-content">
       <img src="https://img.icons8.com/color/160/000000/stock-share-market.png" alt="about">
@@ -461,7 +500,7 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" class="contact">
+  <section id="contact" class="contact" data-aos="fade-up">
     <h2>Contact Us</h2>
     <div class="contact-content">
       <p>We're here 24/7—reach out for account help, trading questions, or general support.</p>
@@ -475,114 +514,120 @@
   </section>
 
   <!-- SIGNUP CTA -->
-  <section id="signup" class="benefits">
+  <section id="signup" class="benefits" data-aos="fade-up">
     <h2>Start Trading Now—Free Forever Plan</h2>
-    <form style="max-width:420px;margin:30px auto 0 auto;display:flex;flex-direction:column;gap:17px;">
+    <form style="max-width:400px;margin:34px auto 0 auto;display:flex;flex-direction:column;gap:18px;">
       <input type="text" placeholder="Full Name" required>
       <input type="email" placeholder="Email Address" required>
       <input type="password" placeholder="Set a Password" required>
       <button type="submit">Create Your Free Account</button>
     </form>
   </section>
-  <footer style="padding:40px 0 22px 0;text-align:center;color:#6d28d9;font-size:1.07em;background:#0f172a;margin-top:48px;">
+  <footer>
     &copy; 2025 PulseTradeX Demo. All Rights Reserved.
   </footer>
-  <!-- Simple animated chart logic (vanilla JS/CSS for demo, not production grade) -->
+
+  <!-- Animate On Scroll -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script>
+    AOS.init({ duration: 900, easing: 'ease-out-cubic', once: false });
+  </script>
+  <!-- HERO Animated Chart -->
   <script>
     // HERO CHART - animated wavy line for 'market signal'
     const hctx = document.getElementById('heroChart').getContext('2d');
     let hstep = 0;
     function heroChartWave() {
-      hctx.clearRect(0,0,320,140);
+      hctx.clearRect(0,0,295,109);
       hctx.beginPath();
-      hctx.moveTo(0,120);
-      for(let x=0;x<=320;x++){
-        let y = 80+40*Math.sin((x/40)+hstep/12)+8*Math.cos((x/13)-hstep/9);
+      hctx.moveTo(0,90);
+      for(let x=0;x<=295;x++){
+        let y = 54+35*Math.sin((x/37)+hstep/11)+7*Math.cos((x/14)-hstep/12);
         hctx.lineTo(x,y);
       }
       hctx.strokeStyle="#22d3ee";
-      hctx.lineWidth=3.8;
-      hctx.shadowBlur=8;
+      hctx.lineWidth=3.2;
+      hctx.shadowBlur=7;
       hctx.shadowColor="#38bdf8";
       hctx.stroke();
       hctx.shadowBlur=0;
-      // animated dots
-      for (let n=30;n<=300;n+=57){
-        let yd = 80+40*Math.sin((n/40)+hstep/12)+8*Math.cos((n/13)-hstep/9);
-        hctx.beginPath();hctx.arc(n,yd,5,0,6.28);hctx.fillStyle=hstep%15<7?"#10b981":"#ef4444";hctx.fill();
+      // animated dots (for signal effect)
+      for (let n=22;n<=270;n+=56){
+        let yd = 54+35*Math.sin((n/37)+hstep/11)+7*Math.cos((n/14)-hstep/12);
+        hctx.beginPath();hctx.arc(n,yd,4.8,0,6.28);hctx.fillStyle=hstep%15<7?"#10b981":"#ef4444";hctx.fill();
       }
       hstep++;
       requestAnimationFrame(heroChartWave);
     }
     heroChartWave();
-
-    // Demo mini charts: Line, Doughnut, and Bar using Chart.js CDN (for quick static graphs)
-    (() => {
-      const script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
-      script.onload = function () {
-        // Line Chart
-        new Chart(document.getElementById('lineChart'), {
-          type: 'line',
-          data: {
-            labels: ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00"],
-            datasets: [{
-              label: 'ACME',
-              data: [105,109,103,112,116,117,113,118,121],
-              borderColor: "#22d3ee",
-              backgroundColor: "#38bdf866",
-              fill:true,
-              tension:0.38,
-              pointBackgroundColor: "#6d28d9",
-              pointRadius:4
-            }]
-          },
-          options: {
-            plugins: {legend: {display: false}},
-            scales: {x:{display:false},y:{display:false}},
-            responsive:false
-          }
-        });
-        // Doughnut
-        new Chart(document.getElementById('doughnutChart'),{
-          type:'doughnut',
-          data:{
-            labels:["Tech","Energy","Finance","Health"],
-            datasets:[{
-              data:[43,26,19,12],
-              backgroundColor:["#22d3ee","#ef4444","#10b981","#f59e42"],
-              hoverOffset:6
-            }]
-          },
-          options: {
-            plugins: {legend: {display: true, position:'bottom', labels:{color:'#fff'}}},
-            cutout:'62%', responsive:false
-          }
-        });
-        // Bar
-        new Chart(document.getElementById('barChart'),{
-          type:'bar',
-          data:{
-            labels:["TSLA","NVDA","AMZN","GOOG","META"],
-            datasets:[{
-              label:"Change %",
-              data:[4.9,2.6,-1.1,3.3,-2.6],
-              backgroundColor:[
-                "#10b981","#10b981","#ef4444","#10b981","#ef4444"
-              ]
-            }]
-          },
-          options:{
-            plugins:{legend:{display:false}},
-            scales:{
-              x:{ticks:{color:'#fff'}},
-              y:{display:false}
-            }, responsive:false
-          }
-        });
-      };
-      document.head.appendChild(script);
-    })();
+  </script>
+  <!-- Mini Charts (Chart.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Line Chart
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels: ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00"],
+        datasets: [{
+          label: 'ACME',
+          data: [105,109,103,112,116,117,113,118,121],
+          borderColor: "#22d3ee",
+          backgroundColor: "#38bdf85e",
+          fill:true,
+          tension:0.38,
+          pointBackgroundColor: "#6d28d9",
+          pointRadius:3.7
+        }]
+      },
+      options: {
+        plugins: {legend: {display: false}},
+        scales: {x:{display:false},y:{display:false}},
+        responsive:true,
+        maintainAspectRatio:false
+      }
+    });
+    // Doughnut Chart
+    new Chart(document.getElementById('doughnutChart'),{
+      type:'doughnut',
+      data:{
+        labels:["Tech","Energy","Finance","Health"],
+        datasets:[{
+          data:[43,26,19,12],
+          backgroundColor:["#22d3ee","#ef4444","#10b981","#f59e42"],
+          hoverOffset:6
+        }]
+      },
+      options: {
+        plugins: {legend: {display: true, position:'bottom', labels:{color:'#fff'}}},
+        cutout:'60%',
+        responsive:true,
+        maintainAspectRatio:false
+      }
+    });
+    // Bar Chart
+    new Chart(document.getElementById('barChart'),{
+      type:'bar',
+      data:{
+        labels:["TSLA","NVDA","AMZN","GOOG","META"],
+        datasets:[{
+          label:"Change %",
+          data:[4.9,2.6,-1.1,3.3,-2.6],
+          backgroundColor:[
+            "#10b981","#10b981","#ef4444","#10b981","#ef4444"
+          ]
+        }]
+      },
+      options:{
+        plugins:{legend:{display:false}},
+        scales:{
+          x:{ticks:{color:'#fff'}},
+          y:{display:false}
+        },
+        responsive:true,
+        maintainAspectRatio:false
+      }
+    });
   </script>
 </body>
 </html>
