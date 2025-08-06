@@ -134,7 +134,6 @@
       margin-bottom: 8px;
     }
 
-    /* SECTION SPACING */
     section {
       padding: 82px 4vw 72px 4vw;
       max-width: 1200px;
@@ -182,31 +181,46 @@
     }
     .benefit-img img { width: 29px; }
 
-    .charts-section { margin-top: 40px; padding: 60px 0 45px 0; }
+    /* SIMPLIFIED/SMALLER CHARTS SECTION */
+    .charts-section { margin-top: 40px; padding: 44px 0 35px 0; }
     .charts-row {
       display: flex;
-      gap: 43px 37px;
+      gap: 24px 20px;
       flex-wrap: wrap;
       justify-content: center;
       align-items: flex-start;
     }
     .chart-card {
       background: var(--surface);
-      border-radius: 18px;
+      border-radius: 14px;
       box-shadow: var(--shadow);
-      padding: 28px 24px 28px 21px;
-      min-width: 310px; max-width: 400px;
-      flex: 1 0 330px;
+      padding: 14px 10px 10px 10px;
+      min-width: 170px; max-width: 230px;
+      flex: 1 0 175px;
       display: flex; flex-direction: column; align-items: center;
-      margin-bottom: 38px;
-      min-height: 210px;
+      margin-bottom: 24px;
+      min-height: 110px;
+      border: 1px solid #22243b;
     }
     .chart-title {
-      font-size: 1.19em;
+      font-size: 1em;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 6px;
       color: var(--primary);
     }
+    /* Keep canvas small and make sure it never stretches out the section */
+    .chart-card canvas {
+      width: 155px !important;
+      height: 70px !important;
+      min-width: 120px;
+      min-height: 48px;
+      display: block;
+      margin-bottom: 8px;
+      background: #181c2a;
+      border-radius: 10px;
+    }
+
+    /* Feed, Testimonials, About, Contact, Signup unchanged for brevity (same as last version) */
     .testimonial-list {
       margin: 0 auto;
       max-width: 940px;
@@ -244,8 +258,6 @@
     .testimonial-3d img { width: 36px; }
     .testimonial-author { margin-top: 1em; font-weight: 700; color: var(--accent);}
     .testimonial-title { font-size: 1em; color: #b1fffb9a; font-style: italic; }
-
-    /* ABOUT & CONTACT */
     .about-content, .contact-content {
       max-width: 750px;
       margin: 0 auto;
@@ -277,7 +289,6 @@
       transition: background 0.17s;
     }
     .cta-secondary:hover { background: var(--secondary); color: var(--white);}
-    /* Instagram-like Feed (for scroll) */
     .feed-section {padding:0 0 80px 0;}
     .feed-title {
       text-align:center;font-size:1.45rem;font-weight:600;color:var(--primary);margin-bottom:2.1em;margin-top:2em;
@@ -294,7 +305,6 @@
     }
     .feed-img{width:100%;border-radius:11px;margin-bottom:13px;box-shadow:0 5px 20px #22d3ee37;}
     .feed-caption {font-size:1.04em;color:var(--white);margin-top:4px;text-align:center;}
-
     #signup input, #signup button {
       width:100%;margin-bottom:13px;padding:14px;border-radius:7px;border:none;font-size:1em;
     }
@@ -314,8 +324,6 @@
       header { min-height: 90vh;}
       .header-content { padding: 43px 5vw 25px 5vw;}
       h1 { font-size: 1.15rem;}
-      .charts-row,.feed-list{gap:18px;}
-      .benefit-list{gap:18px;}
     }
     @media (max-width:500px) {
       .hero-3d {width:99vw;max-width:98vw;}
@@ -358,7 +366,6 @@
       </div>
     </div>
   </header>
-
   <!-- BROKER BENEFITS -->
   <section id="benefits" class="benefits" data-aos="fade-up">
     <h2>Broker Benefits</h2>
@@ -395,27 +402,25 @@
       </div>
     </div>
   </section>
-
-  <!-- DYNAMIC CHARTS & GRAPHICS SECTION -->
+  <!-- SIMPLIFIED/SMALL CHARTS SECTION -->
   <section class="charts-section" data-aos="fade-up">
     <h2>Market Insights & Visualizations</h2>
     <div class="charts-row">
-      <div class="chart-card" data-aos="flip-left">
-        <div class="chart-title">Stock Price Over Time</div>
-        <canvas id="lineChart" width="292" height="120"></canvas>
+      <div class="chart-card" data-aos="fade-up">
+        <div class="chart-title">Stock Trend</div>
+        <canvas id="lineChart" width="155" height="70"></canvas>
       </div>
-      <div class="chart-card" data-aos="flip-up">
-        <div class="chart-title">Portfolio Allocation</div>
-        <canvas id="doughnutChart" width="230" height="120"></canvas>
+      <div class="chart-card" data-aos="fade-up" data-aos-delay="140">
+        <div class="chart-title">Portfolio</div>
+        <canvas id="doughnutChart" width="155" height="70"></canvas>
       </div>
-      <div class="chart-card" data-aos="flip-right">
-        <div class="chart-title">Top Gainers & Losers</div>
-        <canvas id="barChart" width="268" height="120"></canvas>
+      <div class="chart-card" data-aos="fade-up" data-aos-delay="280">
+        <div class="chart-title">Movers</div>
+        <canvas id="barChart" width="155" height="70"></canvas>
       </div>
     </div>
   </section>
-
-  <!-- DEMO FAKE TRADER FEED (social/market/news scroller) -->
+  <!-- FEED (Stories) -->
   <section class="feed-section" data-aos="fade-up">
     <div class="feed-title">PulseTradeX Market Moments</div>
     <div class="feed-list">
@@ -453,7 +458,6 @@
       </div>
     </div>
   </section>
-
   <!-- TESTIMONIALS -->
   <section class="testimonials" data-aos="fade-up">
     <h2>What Our Traders Say</h2>
@@ -484,7 +488,6 @@
       </div>
     </div>
   </section>
-
   <!-- ABOUT US -->
   <section class="about" id="about" data-aos="fade-up">
     <h2>About PulseTradeX</h2>
@@ -498,7 +501,6 @@
       </p>
     </div>
   </section>
-
   <!-- CONTACT -->
   <section id="contact" class="contact" data-aos="fade-up">
     <h2>Contact Us</h2>
@@ -512,7 +514,6 @@
       <a class="cta-secondary" href="mailto:support@pulstradex.com">Email Us</a>
     </div>
   </section>
-
   <!-- SIGNUP CTA -->
   <section id="signup" class="benefits" data-aos="fade-up">
     <h2>Start Trading Now—Free Forever Plan</h2>
@@ -526,7 +527,6 @@
   <footer>
     &copy; 2025 PulseTradeX Demo. All Rights Reserved.
   </footer>
-
   <!-- Animate On Scroll -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
   <script>
@@ -561,58 +561,57 @@
     }
     heroChartWave();
   </script>
-  <!-- Mini Charts (Chart.js) -->
+  <!-- Mini Charts (Chart.js, smaller size & less animations for perf) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Line Chart
+    // Smaller, simpler charts for a smooth section
     new Chart(document.getElementById('lineChart'), {
       type: 'line',
       data: {
-        labels: ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00"],
+        labels: ["09","10","11","12","13","14"],
         datasets: [{
-          label: 'ACME',
-          data: [105,109,103,112,116,117,113,118,121],
+          label: 'Demo',
+          data: [105,107,109,107,112,119],
           borderColor: "#22d3ee",
-          backgroundColor: "#38bdf85e",
+          backgroundColor: "rgba(56,189,248,0.19)",
           fill:true,
           tension:0.38,
           pointBackgroundColor: "#6d28d9",
-          pointRadius:3.7
+          pointRadius:2.7
         }]
       },
       options: {
         plugins: {legend: {display: false}},
         scales: {x:{display:false},y:{display:false}},
-        responsive:true,
-        maintainAspectRatio:false
+        responsive:true, maintainAspectRatio:false,
+        animation: false
       }
     });
-    // Doughnut Chart
     new Chart(document.getElementById('doughnutChart'),{
       type:'doughnut',
       data:{
         labels:["Tech","Energy","Finance","Health"],
         datasets:[{
-          data:[43,26,19,12],
+          data:[48,22,18,12],
           backgroundColor:["#22d3ee","#ef4444","#10b981","#f59e42"],
           hoverOffset:6
         }]
       },
       options: {
-        plugins: {legend: {display: true, position:'bottom', labels:{color:'#fff'}}},
-        cutout:'60%',
+        plugins: {legend: {display: false}},
+        cutout:'61%',
         responsive:true,
-        maintainAspectRatio:false
+        maintainAspectRatio:false,
+        animation: false
       }
     });
-    // Bar Chart
     new Chart(document.getElementById('barChart'),{
       type:'bar',
       data:{
         labels:["TSLA","NVDA","AMZN","GOOG","META"],
         datasets:[{
           label:"Change %",
-          data:[4.9,2.6,-1.1,3.3,-2.6],
+          data:[3.1,2.4,-1.2,3.0,-2.1],
           backgroundColor:[
             "#10b981","#10b981","#ef4444","#10b981","#ef4444"
           ]
@@ -625,7 +624,8 @@
           y:{display:false}
         },
         responsive:true,
-        maintainAspectRatio:false
+        maintainAspectRatio:false,
+        animation: false
       }
     });
   </script>
