@@ -1,1 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PulseTradeX – Trade Without Compromise</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #22d3ee;
+      --secondary: #6d28d9;
+      --bg: #111827;
+      --surface: #1f2937;
+      --accent: #38bdf8;
+      --white: #fff;
+      --shadow: 0 4px 24px 0 rgba(56,189,248,0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    header {
+      position: relative;
+      width: 100%;
+      height: 90vh;
+      min-height: 490px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    /* Video Background */
+    #hero-video {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: brightness(0.26) blur(2px);
+    }
+    .header-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 630px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      text-shadow: 0 4px 12px var(--surface);
+    }
+    .hook {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      color: var(--accent);
+      text-shadow: 0 2px 12px #000;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
+    }
+    .cta-buttons {
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .cta {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: var(--white);
+      border: none;
+      padding: 1em 2.4em;
+      font-size: 1rem;
+      border-radius: 50px;
+      font-weight: bold;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s, transform 0.18s;
+    }
+    .cta:hover { background: var(--secondary); transform: translateY(-2px) scale(1.04);}
+    /* 3D animation placeholder */
+    .hero-3d {
+      margin: 60px auto 0 auto;
+      width: 320px;
+      height: 180px;
+      background: linear-gradient(135deg, #1e293b, #4f46e5);
+      border-radius: 16px;
+      box-shadow: 0 12px 60px #38bdf86f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: float 4s ease-in-out infinite;
+      position: relative;
+      z-index: 5;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px);}
+    }
+    .hero-3d span {
+      font-size: 2.1rem;
+      color: var(--primary);
+      font-weight: bold;
+      text-shadow: 0 2px 30px #38bdf8, 0 1px 8px #000;
+    }
+
+    /* SECTION STYLES */
+    section {
+      padding: 70px 18px;
+      max-width: 1080px;
+      margin: 0 auto;
+      background: none;
+    }
+    /* UNIQUE SECTIONS */
+    .benefits, .testimonials, .about, .contact {
+      margin-top: 24px;
+      background: var(--surface);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 42px 18px;
+    }
+    h2 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .benefit-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .benefit {
+      background: rgba(34,211,238,0.05);
+      border-left: 4px solid var(--primary);
+      padding: 1.6em 1.3em;
+      border-radius: 13px;
+      min-width: 220px;
+      max-width: 310px;
+      margin: 10px 0;
+      position: relative;
+      font-size: 1.06rem;
+      flex: 1 0 250px;
+      box-shadow: var(--shadow);
+      transition: transform 0.18s;
+    }
+    .benefit:hover { transform: translateY(-3px) scale(1.02); }
+    .benefit-img {
+      width: 40px; height: 40px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      position: absolute; left: -21px; top: -21px;
+      box-shadow: 0 2px 12px #38bdf8b1;
+    }
+    .benefit-img img { width: 28px; }
+
+    /* TESTIMONIALS */
+    .testimonial-list {
+      margin: 0 auto;
+      max-width: 800px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .testimonial {
+      background: #121a2c;
+      border-radius: 11px;
+      padding: 25px 19px;
+      min-width: 230px; max-width: 320px;
+      flex: 1 0 230px;
+      margin: 0 5px;
+      text-align: left;
+      box-shadow: 0 2px 15px #18181b77;
+      position: relative;
+    }
+    .testimonial:before {
+      content: '“';
+      font-size: 44px;
+      color: var(--primary);
+      position: absolute;
+      left: 8px; top: -8px;
+    }
+    .testimonial-3d {
+      width: 60px; height: 60px; margin-bottom: 1rem;
+      border-radius: 40px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #38bdf8 40%, #6d28d9 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .testimonial-3d img { width: 38px; }
+    .testimonial-author { margin-top: 1em; font-weight: 700; color: var(--accent);}
+    .testimonial-title { font-size: 0.97em; color: #b1fffb85; font-style: italic; }
+
+    /* ABOUT US & CONTACT */
+    .about-content, .contact-content {
+      max-width: 750px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1.17em;
+    }
+    .about-content img {
+      width: 180px; border-radius: 90px; margin: 1em 0 1em 0; box-shadow: 0 1px 12px #22d3ee55;
+    }
+    .contact-details {
+      margin: 38px auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.1em;
+    }
+    .cta-secondary {
+      background: var(--accent);
+      color: var(--surface);
+      margin-top: 18px;
+      padding: 12px 30px;
+      border-radius: 30px;
+      border: none;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: background 0.18s;
+    }
+    .cta-secondary:hover { background: var(--secondary); color: var(--white);}
+    /* Responsive Design */
+    @media (max-width: 950px) {
+      h1 { font-size: 2.1rem;}
+      .benefit-list { flex-direction: column; }
+      .testimonial-list { flex-direction: column; }
+    }
+    @media (max-width: 600px) {
+      header { height: 68vh; min-height: 350px;}
+      .header-content { padding: 8vw 4vw;}
+      h1 { font-size: 1.5rem;}
+      section { padding: 38px 5vw;}
+    }
+    html,body { scroll-behavior: smooth;}
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Video background (use your copyright-safe mp4/webm link or fallback image) -->
+    <video id="hero-video" autoplay loop muted playsinline>
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-animated-stock-market-chart-1325-large.mp4" type="video/mp4">
+      <!-- fallback image -->
+    </video>
+    <div class="header-content">
+      <div class="logo">PulseTradeX</div>
+      <div class="hook">
+        Are you tired of missed trades and lagging tools? <br>
+        <strong>Stop Letting Market Opportunities Slip Away!</strong>
+      </div>
+      <h1>Fast, Secure, and Intuitive Stock Trading</h1>
+      <div class="cta-buttons">
+        <a class="cta" href="#signup">Open Free Account</a>
+        <a class="cta" href="#benefits">Why PulseTradeX?</a>
+        <a class="cta" href="#contact">Contact Support</a>
+      </div>
+      <!-- 3D Animation Graphic Placeholder -->
+      <div class="hero-3d">
+        <span>&#128200; 3D Chart Animation</span>
+      </div>
+    </div>
+  </header>
+  
+  <section id="benefits" class="benefits">
+    <h2>Broker Benefits</h2>
+    <div class="benefit-list">
+      <div class="benefit">
+        <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/money-bag.png" alt="Low Fees"></div>
+        <b>Zero Commission</b><br>
+        Trade stocks, ETFs, and options for $0 per order.
+      </div>
+      <div class="benefit">
+        <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/clock--v1.png" alt="24/7 Support"></div>
+        <b>24/7 Expert Support</b><br>
+        Get instant help from trading specialists anytime.
+      </div>
+      <div class="benefit">
+        <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/parallel-tasks.png" alt="Advanced Tools"></div>
+        <b>Pro-Grade Tools</b><br>
+        Advanced charting, signals, and market analytics at your fingertips.
+      </div>
+      <div class="benefit">
+        <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/lock-2.png" alt="Security"></div>
+        <b>Bank-Grade Security</b><br>
+        256-bit SSL, Two-Factor Authentication, Asset Insurance.
+      </div>
+      <div class="benefit">
+        <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/speed.png" alt="Fast Execution"></div>
+        <b>Ultra-Fast Order Execution</b><br>
+        Your trades placed at lightning speed, always.
+      </div>
+      <div class="benefit">
+        <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/graduation-cap.png" alt="Education"></div>
+        <b>Free Training & Webinars</b><br>
+        Learn & grow with expert-led education modules.
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <h2>Hear from Our Traders</h2>
+    <div class="testimonial-list">
+      <div class="testimonial">
+        <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v3.png" alt="user1"/></div>
+        "PulseTradeX basically changed my life. Their interface is so fast, I've never missed a market move! Super recommend."
+        <div class="testimonial-author">— Alex S.</div>
+        <div class="testimonial-title">Day Trader, New York</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-female-circle--v3.png" alt="user2"/></div>
+        "Their webinars and tutorials walked me from a beginner to consistently profitable. The support team rocks!"
+        <div class="testimonial-author">— Priya D.</div>
+        <div class="testimonial-title">Swing Trader, Mumbai</div>
+      </div>
+      <div class="testimonial">
+        <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v2.png" alt="user3"/></div>
+        "I was always worried about security, but here my funds feel extremely safe. The 3D dashboards are just epic!"
+        <div class="testimonial-author">— Ben L.</div>
+        <div class="testimonial-title">Investor, London</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT US -->
+  <section class="about">
+    <h2>About PulseTradeX</h2>
+    <div class="about-content">
+      <img src="https://img.icons8.com/color/160/000000/stock-share-market.png" alt="about">
+      <p>
+        PulseTradeX was founded by seasoned Wall Street technologists and passionate traders with the goal of democratizing high-speed, secure, and intelligent market access to everyone. Harnessing AI-driven analytics, lightning-fast cloud servers, and a trader-first philosophy, PulseTradeX empowers investors at every stage.
+      </p>
+      <p>
+        <b>Our mission:</b> To help you seize every trading opportunity with confidence, agility, and support you can trust.
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <div class="contact-content">
+      <p>We're here for you 24/7. Reach out for account assistance, trading guidance, or feedback.</p>
+      <div class="contact-details">
+        <span>&#9993; support@pulstradex.com</span>
+        <span>&#x1F4DE; +1 800 123 4567</span>
+        <span>&#127970; 123 Market Street, New York, NY</span>
+      </div>
+      <a class="cta-secondary" href="mailto:support@pulstradex.com">Email Support</a>
+    </div>
+  </section>
+
+  <!-- FAKE SIGNUP SECTION FOR CTA FLOW -->
+  <section id="signup" class="benefits">
+    <h2>Let's Get Trading</h2>
+    <form style="max-width:420px;margin:30px auto 0 auto;display:flex;flex-direction:column;gap:20px;">
+      <input type="text" placeholder="Full Name" style="padding:15px;border-radius:6px;border:none;font-size:1em;">
+      <input type="email" placeholder="Email Address" style="padding:15px;border-radius:6px;border:none;font-size:1em;">
+      <input type="password" placeholder="Set a Password" style="padding:15px;border-radius:6px;border:none;font-size:1em;">
+      <button type="submit" class="cta">Create Your Free Account</button>
+    </form>
+  </section>
+  <footer style="padding:40px 0 20px 0;text-align:center;color:#6d28d9;font-size:1.06em;background:#0f172a;">
+    &copy; 2025 PulseTradeX. All Rights Reserved.
+  </footer>
+</body>
+</html>
 
