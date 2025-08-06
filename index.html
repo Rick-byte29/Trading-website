@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PulseTradeX – Trade Without Compromise</title>
+  <title>PulseTradeX – Demo Stock Broker</title>
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -14,6 +14,10 @@
       --accent: #38bdf8;
       --white: #fff;
       --shadow: 0 4px 24px 0 rgba(56,189,248,0.15);
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e42;
+      --blue: #38bdf8;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -26,32 +30,30 @@
     header {
       position: relative;
       width: 100%;
-      height: 90vh;
-      min-height: 490px;
+      height: 95vh;
+      min-height: 500px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       background: var(--surface);
     }
-    /* Video Background */
     #hero-video {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover;
       z-index: 0;
-      filter: brightness(0.26) blur(2px);
+      filter: brightness(0.2) blur(1.7px);
     }
     .header-content {
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 630px;
+      max-width: 650px;
       margin: 0 auto;
       text-align: center;
     }
     .logo {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 1rem;
@@ -63,15 +65,15 @@
       font-weight: 500;
       margin-bottom: 1.2rem;
       color: var(--accent);
-      text-shadow: 0 2px 12px #000;
+      text-shadow: 0 2px 16px #000;
     }
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.8rem;
+      font-size: 2.7rem;
+      margin-bottom: 0.7rem;
       letter-spacing: 1px;
     }
     .cta-buttons {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -82,7 +84,7 @@
       color: var(--white);
       border: none;
       padding: 1em 2.4em;
-      font-size: 1rem;
+      font-size: 1.08rem;
       border-radius: 50px;
       font-weight: bold;
       box-shadow: var(--shadow);
@@ -90,47 +92,45 @@
       text-decoration: none;
       transition: background 0.18s, transform 0.18s;
     }
-    .cta:hover { background: var(--secondary); transform: translateY(-2px) scale(1.04);}
-    /* 3D animation placeholder */
+    .cta:hover { background: var(--secondary); transform: translateY(-2px) scale(1.05);}
+    /* 3D/Animated Graph Placeholder */
     .hero-3d {
-      margin: 60px auto 0 auto;
-      width: 320px;
-      height: 180px;
+      margin: 55px auto 0 auto;
+      width: 360px;
+      height: 190px;
       background: linear-gradient(135deg, #1e293b, #4f46e5);
       border-radius: 16px;
       box-shadow: 0 12px 60px #38bdf86f;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       animation: float 4s ease-in-out infinite;
       position: relative;
       z-index: 5;
+      overflow: hidden;
+    }
+    .hero-3d-canvas {
+      width: 320px; height: 140px; background: transparent;
+      display: flex; align-items: flex-end; justify-content: flex-start;
+    }
+    .hero-3d-title {
+      font-size: 1.1rem;
+      color: var(--accent);
+      text-shadow: 0 2px 18px #38bdf8, 0 1px 9px #000;
+      font-weight: 600;
+      margin-top: 3px;
     }
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-25px);}
     }
-    .hero-3d span {
-      font-size: 2.1rem;
-      color: var(--primary);
-      font-weight: bold;
-      text-shadow: 0 2px 30px #38bdf8, 0 1px 8px #000;
-    }
-
-    /* SECTION STYLES */
+    /* Section Styles */
     section {
       padding: 70px 18px;
-      max-width: 1080px;
+      max-width: 1100px;
       margin: 0 auto;
       background: none;
-    }
-    /* UNIQUE SECTIONS */
-    .benefits, .testimonials, .about, .contact {
-      margin-top: 24px;
-      background: var(--surface);
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-      padding: 42px 18px;
     }
     h2 {
       font-size: 2rem;
@@ -147,20 +147,20 @@
       justify-content: center;
     }
     .benefit {
-      background: rgba(34,211,238,0.05);
+      background: rgba(34,211,238,0.06);
       border-left: 4px solid var(--primary);
       padding: 1.6em 1.3em;
       border-radius: 13px;
       min-width: 220px;
-      max-width: 310px;
+      max-width: 315px;
       margin: 10px 0;
       position: relative;
-      font-size: 1.06rem;
-      flex: 1 0 250px;
+      font-size: 1.08rem;
+      flex: 1 0 240px;
       box-shadow: var(--shadow);
-      transition: transform 0.18s;
+      transition: transform 0.15s;
     }
-    .benefit:hover { transform: translateY(-3px) scale(1.02); }
+    .benefit:hover { transform: translateY(-2px) scale(1.02); }
     .benefit-img {
       width: 40px; height: 40px;
       background: var(--primary);
@@ -169,63 +169,93 @@
       position: absolute; left: -21px; top: -21px;
       box-shadow: 0 2px 12px #38bdf8b1;
     }
-    .benefit-img img { width: 28px; }
+    .benefit-img img { width: 29px; }
 
-    /* TESTIMONIALS */
+    /* Graph Section */
+    .charts-section {margin-top: 54px; padding: 60px 0;}
+    .charts-row {
+      display: flex;
+      gap: 35px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .chart-card {
+      background: var(--surface);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 26px 23px 24px 23px;
+      min-width: 308px; max-width: 420px;
+      flex: 1 0 330px;
+      display: flex; flex-direction: column; align-items: center;
+      margin-bottom: 32px;
+    }
+    .chart-title {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 13px;
+      color: var(--primary);
+    }
+    .stock-fake-img {
+      width:100%; max-width:320px; border-radius:12px; background:rgba(255,255,255,0.02); box-shadow:0 6px 24px #38bdf844; margin:14px 0 4px 0;
+    }
+
+    /* Testimonials */
+    .testimonials {margin-top: 54px;}
     .testimonial-list {
       margin: 0 auto;
-      max-width: 800px;
+      max-width: 900px;
       display: flex;
-      gap: 32px;
+      gap: 38px;
       flex-wrap: wrap;
       justify-content: center;
     }
     .testimonial {
       background: #121a2c;
       border-radius: 11px;
-      padding: 25px 19px;
-      min-width: 230px; max-width: 320px;
-      flex: 1 0 230px;
+      padding: 29px 21px;
+      min-width: 235px; max-width: 340px;
+      flex: 1 0 235px;
       margin: 0 5px;
       text-align: left;
-      box-shadow: 0 2px 15px #18181b77;
+      box-shadow: 0 2px 17px #18181b77;
       position: relative;
     }
     .testimonial:before {
       content: '“';
-      font-size: 44px;
+      font-size: 42px;
       color: var(--primary);
       position: absolute;
-      left: 8px; top: -8px;
+      left: 10px; top: -10px;
     }
     .testimonial-3d {
-      width: 60px; height: 60px; margin-bottom: 1rem;
+      width: 59px; height: 59px; margin-bottom: 1rem;
       border-radius: 40px;
       overflow: hidden;
       background: linear-gradient(135deg, #38bdf8 40%, #6d28d9 100%);
       display: flex; align-items: center; justify-content: center;
     }
-    .testimonial-3d img { width: 38px; }
+    .testimonial-3d img { width: 36px; }
     .testimonial-author { margin-top: 1em; font-weight: 700; color: var(--accent);}
-    .testimonial-title { font-size: 0.97em; color: #b1fffb85; font-style: italic; }
+    .testimonial-title { font-size: 1em; color: #b1fffb9a; font-style: italic; }
 
-    /* ABOUT US & CONTACT */
+    /* About & Contact */
     .about-content, .contact-content {
-      max-width: 750px;
+      max-width: 760px;
       margin: 0 auto;
       text-align: center;
       font-size: 1.17em;
     }
     .about-content img {
-      width: 180px; border-radius: 90px; margin: 1em 0 1em 0; box-shadow: 0 1px 12px #22d3ee55;
+      width: 180px; border-radius: 90px; margin: 1.2em 0 1.1em 0; box-shadow: 0 1px 12px #22d3ee55;
     }
     .contact-details {
       margin: 38px auto 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      font-size: 1.1em;
+      gap: 11px;
+      font-size: 1.08em;
     }
     .cta-secondary {
       background: var(--accent);
@@ -238,50 +268,81 @@
       font-weight: bold;
       cursor: pointer;
       box-shadow: var(--shadow);
-      transition: background 0.18s;
+      transition: background 0.17s;
     }
     .cta-secondary:hover { background: var(--secondary); color: var(--white);}
-    /* Responsive Design */
+    /* Instagram-like Fake Recent Feed (long-scroll) */
+    .feed-section {padding:0 0 75px 0;}
+    .feed-title {
+      text-align:center;font-size:1.46rem;font-weight:600;color:var(--primary);margin-bottom:1.6em;margin-top:2em;
+    }
+    .feed-list {
+      display:flex;flex-wrap:wrap;justify-content:center;gap:39px;
+      max-width: 1200px;margin:0 auto;
+    }
+    .feed-card {
+      background:var(--surface);border-radius:20px;box-shadow:var(--shadow);
+      padding:18px 19px;min-width:255px;max-width:320px;flex:1 0 250px;
+      display:flex;flex-direction:column;align-items:center;margin-bottom:32px;
+    }
+    .feed-img{width:85%;border-radius:11px;margin-bottom:14px;box-shadow:0 5px 22px #22d3ee33;}
+    .feed-caption {font-size:1.05em;color:var(--white);margin-top:5px;text-align:center;}
+    /* Signup Section */
+    #signup input, #signup button {
+      width:100%;margin-bottom:14px;padding:14px;border-radius:7px;border:none;font-size:1em;
+    }
+    #signup button {
+      background:linear-gradient(90deg, var(--primary), var(--secondary));color:var(--white);
+      font-size:1.07em;font-weight:bold;border:none;cursor:pointer;margin-top:6px;box-shadow:var(--shadow);
+      transition:background 0.18s;
+    }
+    #signup button:hover {background:var(--secondary);}
+    /* Responsive */
     @media (max-width: 950px) {
-      h1 { font-size: 2.1rem;}
-      .benefit-list { flex-direction: column; }
-      .testimonial-list { flex-direction: column; }
+      h1 { font-size:2rem;}
+      .benefit-list, .testimonial-list, .charts-row, .feed-list {flex-direction:column;align-items:center;}
     }
     @media (max-width: 600px) {
-      header { height: 68vh; min-height: 350px;}
-      .header-content { padding: 8vw 4vw;}
-      h1 { font-size: 1.5rem;}
-      section { padding: 38px 5vw;}
+      header { height:62vh;min-height:225px;}
+      .header-content { padding: 7vw 2vw;}
+      h1 { font-size:1.2rem;}
+      section { padding:35px 4vw;}
+      .charts-row,.feed-list{gap:18px;}
     }
-    html,body { scroll-behavior: smooth;}
+    html,body { scroll-behavior:smooth;}
   </style>
 </head>
 <body>
+  <!-- HERO HEADER -->
   <header>
-    <!-- Video background (use your copyright-safe mp4/webm link or fallback image) -->
+    <!-- Trading video loop as background -->
     <video id="hero-video" autoplay loop muted playsinline>
       <source src="https://assets.mixkit.co/videos/preview/mixkit-animated-stock-market-chart-1325-large.mp4" type="video/mp4">
-      <!-- fallback image -->
+      <!-- fallback image can go here -->
     </video>
     <div class="header-content">
       <div class="logo">PulseTradeX</div>
       <div class="hook">
-        Are you tired of missed trades and lagging tools? <br>
-        <strong>Stop Letting Market Opportunities Slip Away!</strong>
+        Are you missing out because of slow, clunky platforms?<br>
+        <strong>Trade On the Pulse—Never Let Market Gains Slip Away!</strong>
       </div>
-      <h1>Fast, Secure, and Intuitive Stock Trading</h1>
+      <h1>Frictionless, Fast, and Secure Stock Trading<br>for Modern Traders</h1>
       <div class="cta-buttons">
         <a class="cta" href="#signup">Open Free Account</a>
         <a class="cta" href="#benefits">Why PulseTradeX?</a>
-        <a class="cta" href="#contact">Contact Support</a>
+        <a class="cta" href="#about">Our Story</a>
+        <a class="cta" href="#contact">Contact Us</a>
       </div>
-      <!-- 3D Animation Graphic Placeholder -->
+
+      <!-- Animated Stock Graph in 3D area -->
       <div class="hero-3d">
-        <span>&#128200; 3D Chart Animation</span>
+        <canvas class="hero-3d-canvas" id="heroChart" width="320" height="140"></canvas>
+        <div class="hero-3d-title">Live-Look Demo: Market Signals</div>
       </div>
     </div>
   </header>
-  
+
+  <!-- BROKER BENEFITS -->
   <section id="benefits" class="benefits">
     <h2>Broker Benefits</h2>
     <div class="benefit-list">
@@ -293,66 +354,108 @@
       <div class="benefit">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/clock--v1.png" alt="24/7 Support"></div>
         <b>24/7 Expert Support</b><br>
-        Get instant help from trading specialists anytime.
+        Get instant help day or night from trading specialists.
       </div>
       <div class="benefit">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/parallel-tasks.png" alt="Advanced Tools"></div>
-        <b>Pro-Grade Tools</b><br>
-        Advanced charting, signals, and market analytics at your fingertips.
+        <b>Pro Charting Tools</b><br>
+        Get market analytics & signals built for professionals.
       </div>
       <div class="benefit">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/lock-2.png" alt="Security"></div>
         <b>Bank-Grade Security</b><br>
-        256-bit SSL, Two-Factor Authentication, Asset Insurance.
+        End-to-end encryption and insurance for your assets.
       </div>
       <div class="benefit">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/speed.png" alt="Fast Execution"></div>
-        <b>Ultra-Fast Order Execution</b><br>
-        Your trades placed at lightning speed, always.
+        <b>Lightning Execution</b><br>
+        Your trades execute instantly—no delays.
       </div>
       <div class="benefit">
         <div class="benefit-img"><img src="https://img.icons8.com/color/48/000000/graduation-cap.png" alt="Education"></div>
-        <b>Free Training & Webinars</b><br>
-        Learn & grow with expert-led education modules.
+        <b>Trader Academy</b><br>
+        Free webinars and market education for all skill levels.
+      </div>
+    </div>
+  </section>
+
+  <!-- DYNAMIC CHARTS & GRAPHICS SECTION -->
+  <section class="charts-section">
+    <h2>Market Insights & Visualizations</h2>
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Stock Price Over Time</div>
+        <canvas id="lineChart" width="300" height="130"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Portfolio Allocation</div>
+        <canvas id="doughnutChart" width="270" height="130"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Top Gainers & Losers</div>
+        <canvas id="barChart" width="290" height="130"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO FAKE TRADER FEED (social/market/news scroller) -->
+  <section class="feed-section">
+    <div class="feed-title">PulseTradeX Market Moments</div>
+    <div class="feed-list">
+      <div class="feed-card">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1517971071642-34a2d3ecc61c?auto=format&fit=crop&w=400&q=80" alt="Stock Desk"/>
+        <div class="feed-caption">"Biggest rally of the year—S&P 500 surges past resistance"<br><small>2 mins ago</small></div>
+      </div>
+      <div class="feed-card">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Trader"/>
+        <div class="feed-caption">"AI-powered stock signals now triggering more trades than ever"<br><small>12 mins ago</small></div>
+      </div>
+      <div class="feed-card">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Charts"/>
+        <div class="feed-caption">"Real-time analytics: Spotting the breakout before anyone else!"<br><small>22 mins ago</small></div>
+      </div>
+      <div class="feed-card">
+        <img class="feed-img" src="https://images.unsplash.com/photo-1508387023473-984a15e8dab2?auto=format&fit=crop&w=400&q=80" alt="Laptop Dashboard"/>
+        <div class="feed-caption">"3D dashboards and animated ticker for immersive trading"<br><small>39 mins ago</small></div>
       </div>
     </div>
   </section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials">
-    <h2>Hear from Our Traders</h2>
+    <h2>What Our Traders Say</h2>
     <div class="testimonial-list">
       <div class="testimonial">
         <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v3.png" alt="user1"/></div>
-        "PulseTradeX basically changed my life. Their interface is so fast, I've never missed a market move! Super recommend."
+        "PulseTradeX is so fast, I never miss a market swing. The intuitive interface and stunning dashboards are a game changer!"
         <div class="testimonial-author">— Alex S.</div>
         <div class="testimonial-title">Day Trader, New York</div>
       </div>
       <div class="testimonial">
         <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-female-circle--v3.png" alt="user2"/></div>
-        "Their webinars and tutorials walked me from a beginner to consistently profitable. The support team rocks!"
+        "Superb tutorials! From rookie to confident investor—all thanks to their trader academy and 24/7 support."
         <div class="testimonial-author">— Priya D.</div>
         <div class="testimonial-title">Swing Trader, Mumbai</div>
       </div>
       <div class="testimonial">
         <div class="testimonial-3d"><img src="https://img.icons8.com/color/48/000000/user-male-circle--v2.png" alt="user3"/></div>
-        "I was always worried about security, but here my funds feel extremely safe. The 3D dashboards are just epic!"
+        "Funds feel extremely safe with their security-first philosophy. 3D analytics make analysis fun and effective."
         <div class="testimonial-author">— Ben L.</div>
-        <div class="testimonial-title">Investor, London</div>
+        <div class="testimonial-title">Growth Investor, London</div>
       </div>
     </div>
   </section>
 
   <!-- ABOUT US -->
-  <section class="about">
+  <section class="about" id="about">
     <h2>About PulseTradeX</h2>
     <div class="about-content">
       <img src="https://img.icons8.com/color/160/000000/stock-share-market.png" alt="about">
       <p>
-        PulseTradeX was founded by seasoned Wall Street technologists and passionate traders with the goal of democratizing high-speed, secure, and intelligent market access to everyone. Harnessing AI-driven analytics, lightning-fast cloud servers, and a trader-first philosophy, PulseTradeX empowers investors at every stage.
+        PulseTradeX was founded by passionate market insiders and AI technologists to deliver the fastest, most intuitive, and secure trading experience. Our unique 3D dashboards and real-time analytics let every trader—from beginner to pro—capture tomorrow’s profits today.
       </p>
       <p>
-        <b>Our mission:</b> To help you seize every trading opportunity with confidence, agility, and support you can trust.
+        <b>Our mission:</b> Empower modern investors with top-tier speed, safety, and insight.
       </p>
     </div>
   </section>
@@ -361,29 +464,125 @@
   <section id="contact" class="contact">
     <h2>Contact Us</h2>
     <div class="contact-content">
-      <p>We're here for you 24/7. Reach out for account assistance, trading guidance, or feedback.</p>
+      <p>We're here 24/7—reach out for account help, trading questions, or general support.</p>
       <div class="contact-details">
         <span>&#9993; support@pulstradex.com</span>
         <span>&#x1F4DE; +1 800 123 4567</span>
         <span>&#127970; 123 Market Street, New York, NY</span>
       </div>
-      <a class="cta-secondary" href="mailto:support@pulstradex.com">Email Support</a>
+      <a class="cta-secondary" href="mailto:support@pulstradex.com">Email Us</a>
     </div>
   </section>
 
-  <!-- FAKE SIGNUP SECTION FOR CTA FLOW -->
+  <!-- SIGNUP CTA -->
   <section id="signup" class="benefits">
-    <h2>Let's Get Trading</h2>
-    <form style="max-width:420px;margin:30px auto 0 auto;display:flex;flex-direction:column;gap:20px;">
-      <input type="text" placeholder="Full Name" style="padding:15px;border-radius:6px;border:none;font-size:1em;">
-      <input type="email" placeholder="Email Address" style="padding:15px;border-radius:6px;border:none;font-size:1em;">
-      <input type="password" placeholder="Set a Password" style="padding:15px;border-radius:6px;border:none;font-size:1em;">
-      <button type="submit" class="cta">Create Your Free Account</button>
+    <h2>Start Trading Now—Free Forever Plan</h2>
+    <form style="max-width:420px;margin:30px auto 0 auto;display:flex;flex-direction:column;gap:17px;">
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email Address" required>
+      <input type="password" placeholder="Set a Password" required>
+      <button type="submit">Create Your Free Account</button>
     </form>
   </section>
-  <footer style="padding:40px 0 20px 0;text-align:center;color:#6d28d9;font-size:1.06em;background:#0f172a;">
-    &copy; 2025 PulseTradeX. All Rights Reserved.
+  <footer style="padding:40px 0 22px 0;text-align:center;color:#6d28d9;font-size:1.07em;background:#0f172a;margin-top:48px;">
+    &copy; 2025 PulseTradeX Demo. All Rights Reserved.
   </footer>
+  <!-- Simple animated chart logic (vanilla JS/CSS for demo, not production grade) -->
+  <script>
+    // HERO CHART - animated wavy line for 'market signal'
+    const hctx = document.getElementById('heroChart').getContext('2d');
+    let hstep = 0;
+    function heroChartWave() {
+      hctx.clearRect(0,0,320,140);
+      hctx.beginPath();
+      hctx.moveTo(0,120);
+      for(let x=0;x<=320;x++){
+        let y = 80+40*Math.sin((x/40)+hstep/12)+8*Math.cos((x/13)-hstep/9);
+        hctx.lineTo(x,y);
+      }
+      hctx.strokeStyle="#22d3ee";
+      hctx.lineWidth=3.8;
+      hctx.shadowBlur=8;
+      hctx.shadowColor="#38bdf8";
+      hctx.stroke();
+      hctx.shadowBlur=0;
+      // animated dots
+      for (let n=30;n<=300;n+=57){
+        let yd = 80+40*Math.sin((n/40)+hstep/12)+8*Math.cos((n/13)-hstep/9);
+        hctx.beginPath();hctx.arc(n,yd,5,0,6.28);hctx.fillStyle=hstep%15<7?"#10b981":"#ef4444";hctx.fill();
+      }
+      hstep++;
+      requestAnimationFrame(heroChartWave);
+    }
+    heroChartWave();
+
+    // Demo mini charts: Line, Doughnut, and Bar using Chart.js CDN (for quick static graphs)
+    (() => {
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+      script.onload = function () {
+        // Line Chart
+        new Chart(document.getElementById('lineChart'), {
+          type: 'line',
+          data: {
+            labels: ["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00"],
+            datasets: [{
+              label: 'ACME',
+              data: [105,109,103,112,116,117,113,118,121],
+              borderColor: "#22d3ee",
+              backgroundColor: "#38bdf866",
+              fill:true,
+              tension:0.38,
+              pointBackgroundColor: "#6d28d9",
+              pointRadius:4
+            }]
+          },
+          options: {
+            plugins: {legend: {display: false}},
+            scales: {x:{display:false},y:{display:false}},
+            responsive:false
+          }
+        });
+        // Doughnut
+        new Chart(document.getElementById('doughnutChart'),{
+          type:'doughnut',
+          data:{
+            labels:["Tech","Energy","Finance","Health"],
+            datasets:[{
+              data:[43,26,19,12],
+              backgroundColor:["#22d3ee","#ef4444","#10b981","#f59e42"],
+              hoverOffset:6
+            }]
+          },
+          options: {
+            plugins: {legend: {display: true, position:'bottom', labels:{color:'#fff'}}},
+            cutout:'62%', responsive:false
+          }
+        });
+        // Bar
+        new Chart(document.getElementById('barChart'),{
+          type:'bar',
+          data:{
+            labels:["TSLA","NVDA","AMZN","GOOG","META"],
+            datasets:[{
+              label:"Change %",
+              data:[4.9,2.6,-1.1,3.3,-2.6],
+              backgroundColor:[
+                "#10b981","#10b981","#ef4444","#10b981","#ef4444"
+              ]
+            }]
+          },
+          options:{
+            plugins:{legend:{display:false}},
+            scales:{
+              x:{ticks:{color:'#fff'}},
+              y:{display:false}
+            }, responsive:false
+          }
+        });
+      };
+      document.head.appendChild(script);
+    })();
+  </script>
 </body>
 </html>
-
